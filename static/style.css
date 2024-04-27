@@ -1,0 +1,19 @@
+.hidden {
+display: none;
+}
+
+header, footer {
+background-color: #187878;
+color: white;
+padding: 15px;
+text-align: left;
+}
+
+img{
+width: 550x;
+}
+
+.color {
+width:100px;
+height:20px;
+}

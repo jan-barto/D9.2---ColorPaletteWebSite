@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-5">
+            <h4>Nahrát obrázek</h4>
+
+            <form action="/" method="POST" class="pt-4" enctype="multipart/form-data">
+                <div class="form-group py-3">
+                    <label for="picture">Nahrát soubor k analýze barev:</label><br>
+                    <input type="file" class="form-control" id="picture" name="picture" accept="image/png, image/jpeg">
+                </div>
+                <div class="form-group py-3">
+                    <label for="colors_num_field">Počet barev</label>
+                    <input type="number" class="form-control" name="colors_num" id="colors_num_field"
+                           value={{setting.colors_num_set}}
+                           required pattern="[0-9]+">
+                    <small class="form-text text-muted">Napište počet barev, které chcete z obrázku získat, např.
+                        10.</small>
+                </div>
+                <div class="form-group py-3">
+                    <label for="delta_field">Delta</label>
+                    <input type="number" class="form-control" name="delta" id="delta_field" value={{setting.delta_set}}
+                           required min=1
+                           max=765>
+                    <small class="form-text text-muted">Delta udává minimální součet rozdílů v kanalách R, G, B. </small>
+                </div>
+                <div class="form-group py-3">
+                    <button type="submit" class="btn btn-light">Odeslat</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-7 pb-3">
+            <img src="{{ setting.file_set }}" class="img-fluid" alt="obrázek k analýze">
+        </div>
+    </div>
+</div>
+
+{% if colors %}
+<div class="container my-5">
+     <h4>Nejčastější barvy</h4>
+    {% for item in colors %}
+    <div class="row">
+        <div class="col-5">
+            {{ item }}
+            <div class="color" style="background:{{item}}"> </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
